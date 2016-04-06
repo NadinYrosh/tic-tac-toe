@@ -28,20 +28,21 @@ Board.prototype.checkWin() {
   for (i = 0; i < 3; i++) {
     //check horizontal win
     if (((spaces[0 + i*3].squareValue === spaces[1 + i*3].squareValue) &&  (spaces[1 + i*3].squareValue === spaces[2 + i*3].squareValue)) && (spaces[0 + i*3].squareValue !== "")) {
+      //return squareValue of winner
+      return spaces[0 + i*3].squareValue;
+    }
+    //check vertical win
+    else if (((spaces[0 + i*1].squareValue === spaces[1 + i*1].squareValue) &&  (spaces[1 + i*1].squareValue === spaces[2 + i*1].squareValue)) && (spaces[0 + i*1].squareValue !== "")) {
       //return squareValue of winner?
       return spaces[0 + i*3].squareValue;
     }
-
-    //check vertical win
-    else if () {
-      //return squareValue of winner?
-    }
   }
-
   //check diagonal win
-  if () {
-    //return squareValue of winner?
+  if ((((spaces[0].squareValue === spaces[4].squareValue) &&  (spaces[4].squareValue === spaces[8].squareValue)) && (spaces[0].squareValue !== "")) || (((spaces[2].squareValue === spaces[4].squareValue) &&  (spaces[4].squareValue === spaces[6].squareValue)) && (spaces[2].squareValue !== ""))){
+  //return squareValue of winner?
+  return spaces[4].squareValue;
   }
+  //return null if no winners
   return null;
 }
 
