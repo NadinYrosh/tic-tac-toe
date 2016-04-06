@@ -1,0 +1,20 @@
+th, td {
+    padding: 20px;
+}
+
+.border-sides {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.border-topbot {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#board {
+  text-align: center;
+  border-collapse: collapse;
+  width: 50%;
+  font-size: 30px;
+}
