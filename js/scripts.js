@@ -50,7 +50,7 @@ Board.prototype.markSpace = function(y_coordinate, x_coordinate, playerMark) {
   //calculate array location (based on coordinates)
   var location =  x_coordinate + 3*y_coordinate;
   //if space is not taken
-  if (this.spaces[location.squareValue] === ""){
+  if (this.spaces[location].squareValue === ""){
     //places playerMark in that space (space.SquareValue)
     this.spaces[location].squareValue = playerMark;
     return true;
@@ -78,10 +78,10 @@ Board.prototype.allFull = function () {
 //Game object, creates players and board, increments turn, and checks whether someone wins
 function Game () {
   //create players
-  player1 = new Player("X");
-  player2 = new Player("O");
+  this.player1 = new Player("X");
+  this.player2 = new Player("O");
   //create board
-  board = new Board();
+  this.board = new Board();
   //who's turn is it
   this.playerTurn = "player1";
 }
@@ -93,19 +93,18 @@ Game.prototype.whosTurn = function() {
 Game.prototype.takeTurn = function(y_coordinate, x_coordinate) {
   //call board function to mark a space
   if (this.playerTurn === "player1") { //who's turn is it?
+
     //if player 1, use player1 symbol
-    if (board.markSpace(y_coordinate, x_coordinate, player1.symbol) === false) {
+    if (this.board.markSpace(y_coordinate, x_coordinate, this.player1.symbol) === false) {
       return false; //if false (space was taken), escape from method
     }
   }
   else {
     //if player 2 turn, use player2 symbol
-    if (board.markSpace(y_coordinate, x_coordinate, player2.symbol) === false) {
+    if (this.board.markSpace(y_coordinate, x_coordinate, this.player2.symbol) === false) {
       return false; //if false (space was taken), escape from method
     }
   }
-  //check for winner
-  if (board.checkWin() === false) {
     //toggle turn
     if (this.playerTurn === "player1") {
       this.playerTurn = "player2";
@@ -113,23 +112,20 @@ Game.prototype.takeTurn = function(y_coordinate, x_coordinate) {
     else {
       this.playerTurn = "player1";
     }
-  }
-  //else don't toggle turn (so UI can print who's turn it is)
-  else {};
   return true;
 }
 //is the game finished?
 Game.prototype.isFinished = function() {
   //call board.checkWin
-  if (board.checkWin() === null) {
+  if (this.board.checkWin() === null) {
     //if 'not' a winner, check for "all full"
-    if (board.allFull() === true) {
+    if (this.board.allFull() === true) {
       return "tie";
     }
   }
   else {
     //board.checkWin returns "X" or "O"
-    return board.checkWin();
+    return this.board.checkWin();
   }
 }
 
@@ -141,7 +137,6 @@ function runGame(y_coordinate, x_coordinate) {
   //call ourGame.takeTurn(y_coordinate, x_coordinate)
     //if space was taken
   if (ourGame.takeTurn(y_coordinate, x_coordinate) === false) {
-    alert("false");
     //return false
     return false;
   }
@@ -156,8 +151,9 @@ function runGame(y_coordinate, x_coordinate) {
       alert("You have a tie");
     } else{
       //display result of ourGame.whosTurn
-      alert(ourGame.whosTurn());
+      // alert(ourGame.whosTurn());
     }
+    return true;
   }
 }
 
@@ -171,7 +167,7 @@ $(document).ready(function() {
 
     //call runGame() function
     if (runGame(2,2) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {//if player 2 is next turn
         //place a mark on the board
         $("#2y2x").text("X");
       }
@@ -185,7 +181,7 @@ $(document).ready(function() {
   $("#2y1x").click(function(){
     //call runGame() function
     if (runGame(2,1) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#2y1x").text("X");
       }
@@ -199,7 +195,7 @@ $(document).ready(function() {
   $("#2y0x").click(function(){
     //call runGame() function
     if (runGame(2,0) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#2y0x").text("X");
       }
@@ -213,7 +209,7 @@ $(document).ready(function() {
   $("#1y2x").click(function(){
     //call runGame() function
     if (runGame(1,2) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#1y2x").text("X");
       }
@@ -227,7 +223,7 @@ $(document).ready(function() {
   $("#1y1x").click(function(){
     //call runGame() function
     if (runGame(1,1) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#1y1x").text("X");
       }
@@ -241,7 +237,7 @@ $(document).ready(function() {
   $("#1y0x").click(function(){
     //call runGame() function
     if (runGame(1,0) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#1y0x").text("X");
       }
@@ -255,7 +251,7 @@ $(document).ready(function() {
   $("#0y2x").click(function(){
     //call runGame() function
     if (runGame(0,2) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#0y2x").text("X");
       }
@@ -269,7 +265,7 @@ $(document).ready(function() {
   $("#0y1x").click(function(){
     //call runGame() function
     if (runGame(0,1) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#0y1x").text("X");
       }
@@ -283,7 +279,7 @@ $(document).ready(function() {
   $("#0y0x").click(function(){
     //call runGame() function
     if (runGame(0,0) === true) {
-      if (ourGame.whosTurn === "player1") {
+      if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
         $("#0y0x").text("X");
       }
