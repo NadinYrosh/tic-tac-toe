@@ -95,13 +95,13 @@ Game.prototype.takeTurn = function(y_coordinate, x_coordinate) {
   if (this.playerTurn === "player1") { //who's turn is it?
     //if player 1, use player1 symbol
     if (board.markSpace(y_coordinate, x_coordinate, player1.symbol) === false) {
-      return; //if false (space was taken), escape from method
+      return false; //if false (space was taken), escape from method
     }
   }
   else {
     //if player 2 turn, use player2 symbol
     if (board.markSpace(y_coordinate, x_coordinate, player2.symbol) === false) {
-      return; //if false (space was taken), escape from method
+      return false; //if false (space was taken), escape from method
     }
   }
   //check for winner
@@ -116,6 +116,7 @@ Game.prototype.takeTurn = function(y_coordinate, x_coordinate) {
   }
   //else don't toggle turn (so UI can print who's turn it is)
   else {};
+  return true;
 }
 //is the game finished?
 Game.prototype.isFinished = function() {
@@ -134,7 +135,165 @@ Game.prototype.isFinished = function() {
 
 
 //user interface logic
+
+//function to run game
+function runGame(y_coordinate, x_coordinate) {
+  //call ourGame.takeTurn(y_coordinate, x_coordinate)
+    //if space was taken
+  if (ourGame.takeTurn(y_coordinate, x_coordinate) === false) {
+    alert("false");
+    //return false
+    return false;
+  }
+  else {
+    //call ourGame.isFinished
+    if (ourGame.isFinished()  === "X"){
+      //if finished, pop up winner banner
+      alert("Player1 won");
+    } else if (ourGame.isFinished()  === "O"){
+      alert("player2 won");
+    } else if (ourGame.isFinished()  === "tie"){
+      alert("You have a tie");
+    } else{
+      //display result of ourGame.whosTurn
+      alert(ourGame.whosTurn());
+    }
+  }
+}
+
+
 $(document).ready(function() {
+  //created a new game
   ourGame = new Game;
-  alert(ourGame.takeTurn(1,1));
+
+  //.click functions for each table id
+  $("#2y2x").click(function(){
+
+    //call runGame() function
+    if (runGame(2,2) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#2y2x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#2y2x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#2y1x").click(function(){
+    //call runGame() function
+    if (runGame(2,1) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#2y1x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#2y1x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#2y0x").click(function(){
+    //call runGame() function
+    if (runGame(2,0) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#2y0x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#2y0x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#1y2x").click(function(){
+    //call runGame() function
+    if (runGame(1,2) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#1y2x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#1y2x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#1y1x").click(function(){
+    //call runGame() function
+    if (runGame(1,1) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#1y1x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#1y1x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#1y0x").click(function(){
+    //call runGame() function
+    if (runGame(1,0) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#1y0x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#1y0x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#0y2x").click(function(){
+    //call runGame() function
+    if (runGame(0,2) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#0y2x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#0y2x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#0y1x").click(function(){
+    //call runGame() function
+    if (runGame(0,1) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#0y1x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#0y1x").text("O");
+      }
+    }
+  });
+  //.click functions for each table id
+  $("#0y0x").click(function(){
+    //call runGame() function
+    if (runGame(0,0) === true) {
+      if (ourGame.whosTurn === "player1") {
+        //place a mark on the board
+        $("#0y0x").text("X");
+      }
+      else {
+        //place a mark on the board
+        $("#0y0x").text("O");
+      }
+    }
+  });
+
+
+
 });
