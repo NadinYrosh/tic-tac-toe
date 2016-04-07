@@ -1,27 +1,52 @@
+body {
+  background-image: url("../img/background.jpg");
+}
+
 table{
   display: none;
-}
-h1, h2{
-  text-align: center;
+  background-color: #505050;
+  color: #9BD7D5;
 }
 
-th, td {
-    padding: 20px;
+h1{
+  font-size: 60px;
 }
+
+h3{
+  font-size: 60px;
+  color: #f2184f;
+}
+
+h1, h2, h3{
+  text-align: center;
+
+}
+
+tr, td {
+  padding: 0px;
+  margin: 0px;
+}
+
+td {
+  width: 33%;
+  height: 33%;
+}
+
 
 .border-sides {
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
 }
 
 .border-topbot {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 #board {
   text-align: center;
   border-collapse: collapse;
-  width: 50%;
-  font-size: 30px;
+  font-size: 80px;
+  width: 800px;
+  height: 800px;
 }

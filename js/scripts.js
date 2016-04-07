@@ -110,13 +110,13 @@ Game.prototype.takeTurn = function(y_coordinate, x_coordinate) {
       return false; //if false (space was taken), escape from method
     }
   }
-    //toggle turn
-    if (this.playerTurn === "player1") {
-      this.playerTurn = "player2";
-    }
-    else {
-      this.playerTurn = "player1";
-    }
+  //toggle turn
+  if (this.playerTurn === "player1") {
+    this.playerTurn = "player2";
+  }
+  else {
+    this.playerTurn = "player1";
+  }
   return true;
 }
 //is the game finished?
@@ -149,11 +149,11 @@ function runGame(y_coordinate, x_coordinate) {
     //call ourGame.isFinished
     if (ourGame.isFinished()  === player1){
       //if finished, pop up winner banner
-      alert("Player1 won");
+      $(".result").text("Player 1 won!");
     } else if (ourGame.isFinished()  === player2){
-      alert("player2 won");
+      $(".result").text("Player 2 won!");
     } else if (ourGame.isFinished()  === "tie"){
-      alert("You have a tie");
+      (".result").text("You have a tie");
     } else{
       //display result of ourGame.whosTurn
       // alert(ourGame.whosTurn());
