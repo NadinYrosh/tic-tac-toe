@@ -1,3 +1,10 @@
+table{
+  display: none;
+}
+h1, h2{
+  text-align: center;
+}
+
 th, td {
     padding: 20px;
 }

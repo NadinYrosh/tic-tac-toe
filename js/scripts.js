@@ -32,9 +32,9 @@ Board.prototype.checkWin = function() {
       return this.spaces[0 + i*3].squareValue;
     }
     //check vertical win
-    else if (((this.spaces[0 + i*1].squareValue === this.spaces[1 + i*1].squareValue) &&  (this.spaces[1 + i*1].squareValue === this.spaces[2 + i*1].squareValue)) && (this.spaces[0 + i*1].squareValue !== "")) {
+    else if (((this.spaces[0 + i].squareValue === this.spaces[3 + i].squareValue) &&  (this.spaces[3 + i].squareValue === this.spaces[6 + i].squareValue)) && (this.spaces[0 + i].squareValue !== "")) {
       //return squareValue of winner?
-      return this.spaces[0 + i*3].squareValue;
+      return this.spaces[0 + i].squareValue;
     }
   }
   //check diagonal win
@@ -166,20 +166,30 @@ var player1 = "";
 var player2 = "";
 
 $(document).ready(function() {
-   player1 = prompt("Player1 what symbol do you want 'X' or 'O'");
-  if (player1 === "O"){
-    player2 = "X";
-  }
-  else{
-    player2 = "O";
-  }
-  //created a new game
-  ourGame = new Game(player1);
 
+  $("#Xbutton").click(function() {
+    //set player symbols
+    player1 = "X";
+    player2 = "O";
+    //create game object
+    ourGame = new Game(player1);
+    //show table
+    $("#board").show();
+    $(".start").hide();
+  });
+  $("#Obutton").click(function() {
+    //set player symbols
+    player1 = "O";
+    player2 = "X";
+    //create game object
+    ourGame = new Game(player1);
+    //show table
+    $("#board").show();
+    $(".start").hide();
+  });
 
   //.click functions for each table id
   $("#2y2x").click(function(){
-
     //call runGame() function
     if (runGame(2,2) === true) {
       if (ourGame.whosTurn() === "player2") {//if player 2 is next turn
