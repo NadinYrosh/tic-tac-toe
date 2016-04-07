@@ -76,10 +76,15 @@ Board.prototype.allFull = function () {
 }
 
 //Game object, creates players and board, increments turn, and checks whether someone wins
-function Game () {
+function Game (player1_symbol) {
   //create players
-  this.player1 = new Player("X");
-  this.player2 = new Player("O");
+  this.player1 = new Player(player1_symbol)
+  if (player1_symbol === "X"){
+    this.player2 = new Player("O");
+  }
+  else{
+    this.player2 = new Player("X");
+  }
   //create board
   this.board = new Board();
   //who's turn is it
@@ -142,10 +147,10 @@ function runGame(y_coordinate, x_coordinate) {
   }
   else {
     //call ourGame.isFinished
-    if (ourGame.isFinished()  === "X"){
+    if (ourGame.isFinished()  === player1){
       //if finished, pop up winner banner
       alert("Player1 won");
-    } else if (ourGame.isFinished()  === "O"){
+    } else if (ourGame.isFinished()  === player2){
       alert("player2 won");
     } else if (ourGame.isFinished()  === "tie"){
       alert("You have a tie");
@@ -157,10 +162,20 @@ function runGame(y_coordinate, x_coordinate) {
   }
 }
 
+var player1 = "";
+var player2 = "";
 
 $(document).ready(function() {
+   player1 = prompt("Player1 what symbol do you want 'X' or 'O'");
+  if (player1 === "O"){
+    player2 = "X";
+  }
+  else{
+    player2 = "O";
+  }
   //created a new game
-  ourGame = new Game;
+  ourGame = new Game(player1);
+
 
   //.click functions for each table id
   $("#2y2x").click(function(){
@@ -169,11 +184,11 @@ $(document).ready(function() {
     if (runGame(2,2) === true) {
       if (ourGame.whosTurn() === "player2") {//if player 2 is next turn
         //place a mark on the board
-        $("#2y2x").text("X");
+        $("#2y2x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#2y2x").text("O");
+        $("#2y2x").text(player2);
       }
     }
   });
@@ -183,11 +198,11 @@ $(document).ready(function() {
     if (runGame(2,1) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#2y1x").text("X");
+        $("#2y1x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#2y1x").text("O");
+        $("#2y1x").text(player2);
       }
     }
   });
@@ -197,11 +212,11 @@ $(document).ready(function() {
     if (runGame(2,0) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#2y0x").text("X");
+        $("#2y0x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#2y0x").text("O");
+        $("#2y0x").text(player2);
       }
     }
   });
@@ -211,11 +226,11 @@ $(document).ready(function() {
     if (runGame(1,2) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#1y2x").text("X");
+        $("#1y2x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#1y2x").text("O");
+        $("#1y2x").text(player2);
       }
     }
   });
@@ -225,11 +240,11 @@ $(document).ready(function() {
     if (runGame(1,1) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#1y1x").text("X");
+        $("#1y1x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#1y1x").text("O");
+        $("#1y1x").text(player2);
       }
     }
   });
@@ -239,11 +254,11 @@ $(document).ready(function() {
     if (runGame(1,0) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#1y0x").text("X");
+        $("#1y0x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#1y0x").text("O");
+        $("#1y0x").text(player2);
       }
     }
   });
@@ -253,11 +268,11 @@ $(document).ready(function() {
     if (runGame(0,2) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#0y2x").text("X");
+        $("#0y2x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#0y2x").text("O");
+        $("#0y2x").text(player2);
       }
     }
   });
@@ -267,11 +282,11 @@ $(document).ready(function() {
     if (runGame(0,1) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#0y1x").text("X");
+        $("#0y1x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#0y1x").text("O");
+        $("#0y1x").text(player2);
       }
     }
   });
@@ -281,15 +296,12 @@ $(document).ready(function() {
     if (runGame(0,0) === true) {
       if (ourGame.whosTurn() === "player2") {
         //place a mark on the board
-        $("#0y0x").text("X");
+        $("#0y0x").text(player1);
       }
       else {
         //place a mark on the board
-        $("#0y0x").text("O");
+        $("#0y0x").text(player2);
       }
     }
   });
-
-
-
 });
